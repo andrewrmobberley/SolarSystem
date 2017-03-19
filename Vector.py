@@ -12,7 +12,7 @@ def SqMag(c):
 def Mag(c):
     """ 
     Finds the magnitude.
-    :param c: element of array
+    :param c: array
     :return: The square root of the sum of squares of each element => magnitude
     """
     return m.sqrt(c[0]**2 + c[1]**2 + c[2]**2)

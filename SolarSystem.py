@@ -98,7 +98,7 @@ for i in xrange(1,numstep):
 
         ###Periapse and Apoapse Bollocks### 
         if particle0.label == "SUN":           
-            pSun = Planet_list[0] 
+            pSun = Planet_list[x1] 
         if particle0.label == "MOON":
             moonnumber = x1
 	    pMoon = Planet_list[x1]

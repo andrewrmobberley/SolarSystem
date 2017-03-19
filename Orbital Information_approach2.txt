@@ -1,0 +1,44 @@
+HALLEYS_COMET 
+The Apoapse of this body is 5402891893.98km 
+The Periapse of this body is 0.0km 
+ 
+JUPITER 
+The Apoapse of this body is 963224997.7km 
+The Periapse of this body is 0.0km 
+ 
+MARS 
+The Apoapse of this body is 400012784.24km 
+The Periapse of this body is 0.0km 
+ 
+MERCURY 
+The Apoapse of this body is 217101059.32km 
+The Periapse of this body is 0.0km 
+ 
+MOON 
+The Apoapse of this body is 1508138.33886km 
+The Periapse of this body is 422200.936972km 
+ 
+NEPTUNE 
+The Apoapse of this body is 4628461167.32km 
+The Periapse of this body is 0.0km 
+ 
+PLUTO 
+The Apoapse of this body is 5448069167.28km 
+The Periapse of this body is 0.0km 
+ 
+SATURN 
+The Apoapse of this body is 1653050372.69km 
+The Periapse of this body is 0.0km 
+ 
+SUN 
+The Apoapse of this body is 151941480.643km 
+The Periapse of this body is 0.0km 
+ 
+URANUS 
+The Apoapse of this body is 3130998277.64km 
+The Periapse of this body is 0.0km 
+ 
+VENUS 
+The Apoapse of this body is 259327610.038km 
+The Periapse of this body is 0.0km 
+ 

@@ -1,0 +1,94 @@
+*******************************************************************************
+Revised: Jul 31, 2013                  Earth                                399
+ 
+PHYSICAL PROPERTIES (revised Sep 18, 2013):
+ Mean radius, km          = 6371.01+-0.01   Mass, 10^24 kg = 5.97219$+-0.0006
+ Equ. radius, km          = 6378.14+-0.01   Mass layers:
+ Polar axis, km           = 6356.752          Atmos          = 5.1   x 10^18 kg
+ Flattening               = 1/298.257         oceans         = 1.4   x 10^21 kg
+ Density, gm cm^-3        = 5.515             crust          = 2.6   x 10^22 kg
+ J2  (GEM T2, 1990)       = 0.0010826265      mantle         = 4.043 x 10^24 kg
+ gp, m s^-2 (polar)       = 9.8321863685      outer core     = 1.835 x 10^24 kg
+ ge, m s^-2 (equatorial)  = 9.7803267715      inner core     = 9.675 x 10^22 kg
+ go, m s^-2               = 9.82022         Fluid core rad   = 3480 km
+ GM, km^3 s^-2            = 398600.440      Inner core rad   = 1215 km
+ Mean rot. rate, rad s^-1 = 7.292115*10^-5  Surface Area:
+ Sidereal period, hr      = 23.93419          land           = 1.48 x 10^8 km
+ Mean solar day, days     = 1.002738          sea            = 3.62 x 10^8 km
+ Moment of inertia        = 0.3308          Love no., k2     = 0.299
+ Mean Temperature, K      = 270             Atm. pressure    = 1.0 bar
+ Solar constant, W/m^2    = 1367.6          Vis. mag. V(1,0) = -3.86
+ Volume, 10^10 km^3       = 108.321         Geometric albedo = 0.367 
+
+DYNAMICAL CHARACTERISTICS:
+ Obliquity to orbit, deg  = 23.45           Sidereal period  = 1.0000174  yrs
+ Orbit velocity, km s^-1  = 29.7859         Sidereal period  = 365.25636  days
+ Mean daily motion, n     = 0.9856474 deg/d Escape velocity  = 11.186 km s^-1
+ Hill's sphere radius     = 234.9           Magnetic moment  = 0.61 gauss Rp^3
+*******************************************************************************
+ 
+ 
+*******************************************************************************
+Ephemeris / WWW_USER Wed Feb  1 07:58:57 2017 Pasadena, USA      / Horizons    
+*******************************************************************************
+Target body name: Earth (399)                     {source: DE431mx}
+Center body name: Solar System Barycenter (0)     {source: DE431mx}
+Center-site name: BODY CENTER
+*******************************************************************************
+Start time      : A.D. 2017-Jan-25 00:00:00.0000 TDB
+Stop  time      : A.D. 2017-Jan-26 00:00:00.0000 TDB
+Step-size       : 1 steps
+*******************************************************************************
+Center geodetic : 0.00000000,0.00000000,0.0000000 {E-lon(deg),Lat(deg),Alt(km)}
+Center cylindric: 0.00000000,0.00000000,0.0000000 {E-lon(deg),Dxy(km),Dz(km)}
+Center radii    : (undefined)                                                  
+Output units    : KM-S                                                         
+Output type     : GEOMETRIC cartesian states
+Output format   : 3 (position, velocity, LT, range, range-rate)
+Reference frame : ICRF/J2000.0                                                 
+Coordinate systm: Ecliptic and Mean Equinox of Reference Epoch                 
+*******************************************************************************
+            JDTDB,            Calendar Date (TDB),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,                     LT,                     RG,                     RR,
+**************************************************************************************************************************************************************************************************************************************************************************
+$$SOE
+2457778.500000000, A.D. 2017-Jan-25 00:00:00.0000, -8.390909406507476E+07,  1.213076876167144E+08, -2.769246603889018E+04, -2.491320535116161E+01, -1.717227444386703E+01,  1.394104849114619E-03,  4.920075142884734E+02,  1.475001420630116E+08,  4.959689298948605E-02,
+2457779.500000000, A.D. 2017-Jan-26 00:00:00.0000, -8.604839007471165E+07,  1.198052542146447E+08, -2.756235874604434E+04, -2.460617874098097E+01, -1.760534917449019E+01,  1.613393626779036E-03,  4.920225891382821E+02,  1.475046613892897E+08,  5.497242337508289E-02,
+$$EOE
+**************************************************************************************************************************************************************************************************************************************************************************
+Coordinate system description:
+
+  Ecliptic and Mean Equinox of Reference Epoch
+
+    Reference epoch: J2000.0
+    XY-plane: plane of the Earth's orbit at the reference epoch
+              Note: obliquity of 84381.448 arcseconds wrt ICRF equator (IAU76)
+    X-axis  : out along ascending node of instantaneous plane of the Earth's
+              orbit and the Earth's mean equator at the reference epoch
+    Z-axis  : perpendicular to the xy-plane in the directional (+ or -) sense
+              of Earth's north pole at the reference epoch.
+
+  Symbol meaning:
+
+    JDTDB    Julian Day Number, Barycentric Dynamical Time
+      X      X-component of position vector (km)                               
+      Y      Y-component of position vector (km)                               
+      Z      Z-component of position vector (km)                               
+      VX     X-component of velocity vector (km/sec)                           
+      VY     Y-component of velocity vector (km/sec)                           
+      VZ     Z-component of velocity vector (km/sec)                           
+      LT     One-way down-leg Newtonian light-time (sec)                       
+      RG     Range; distance from coordinate center (km)                       
+      RR     Range-rate; radial velocity wrt coord. center (km/sec)            
+
+Geometric states/elements have no aberrations applied.
+
+ Computations by ...
+     Solar System Dynamics Group, Horizons On-Line Ephemeris System
+     4800 Oak Grove Drive, Jet Propulsion Laboratory
+     Pasadena, CA  91109   USA
+     Information: http://ssd.jpl.nasa.gov/
+     Connect    : telnet://ssd.jpl.nasa.gov:6775  (via browser)
+                  http://ssd.jpl.nasa.gov/?horizons
+                  telnet ssd.jpl.nasa.gov 6775    (via command-line)
+     Author     : Jon.D.Giorgini@jpl.nasa.gov
+*******************************************************************************

@@ -7,7 +7,7 @@ def SqMag(c):
     :param c: element of array
     :return: The sum of squares of each element => square magnitude
     """
-    return c[0]**2 + c[1]**2 + c[2]**2
+    return c[0]**2.0 + c[1]**2.0 + c[2]**2.0
 
 def Mag(c):
     """ 
@@ -15,7 +15,7 @@ def Mag(c):
     :param c: array
     :return: The square root of the sum of squares of each element => magnitude
     """
-    return m.sqrt(c[0]**2 + c[1]**2 + c[2]**2)
+    return m.sqrt(c[0]**2.0 + c[1]**2.0 + c[2]**2.0)
 
 
 def add(v1, v2 ):                       

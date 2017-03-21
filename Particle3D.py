@@ -112,6 +112,8 @@ class Particle3D(object):
         :return: Returns the potential energy between of the two particles
 	"""
 	u = -6.67408*10**(-20)*self.mass*particle2.mass/Particle3D.mag_sep(self,particle2)
+
+#	u = -6.67408*10**(-20)*self.mass*particle2.mass/( vctr.SqMag(Particle3D.vecsep(self,particle2))**(1.0/2.0) )
 	return u
 
     @staticmethod

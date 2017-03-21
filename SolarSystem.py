@@ -13,8 +13,8 @@ import matplotlib.pyplot as plt
 
 #getting all bodies used in simulation from input file creator
 bodies = I.bodiesfinal
-VMDFILE = open('VMDtrajectory_approach2.xyz', 'w')
-Orbit_info = open('Orbital Information_approach2.txt', 'w')
+VMDFILE = open('VMDtrajectory.xyz', 'w')
+Orbit_info = open('Orbital Information.txt', 'w')
 
 #Reading initial conditions from CSV file dictionary
 input_file = csv.DictReader(open("SimulationParameters.csv"))
@@ -35,7 +35,9 @@ f_new = 0.0
 u_new =0.0
 period = 0.0
 kinetic_energy =0.0
+total_kinetic= 0.0
 potential_energy =0.0
+total_potential =0.0
 
 #Getting date for progress bar in NICE format
 
@@ -55,24 +57,24 @@ for x1 in xrange(Num_Bodies):
     particle0 = p3D.from_file(bodies[x1].tolist())
     Planet_list.append(particle0)
 
-for x2 in xrange(Num_Bodies):
-    particle0 = Planet_list[x2]
+for x3 in xrange(Num_Bodies):
+    particle0 = Planet_list[x3]
     if particle0.label == "SUN":
-        sunnumber =x2
-        pSun = Planet_list[x2] 
+        sunnumber = x3
+        pSun = Planet_list[x3] 
 
-for x1 in xrange(Num_Bodies):
-    particle0 = Planet_list[x1]
+for x4 in xrange(Num_Bodies):
+    particle0 = Planet_list[x4]
     Period.append([])
-    if x1 != sunnumber:
-        Periapse[x1] = p3D.mag_sep(particle0,pSun)
+    if x4 != sunnumber:
+        Periapse[x4] = p3D.mag_sep(particle0,pSun)
     #moon
     if particle0.label == "MOON":
-        moonnumber = x1
-        pMoon = Planet_list[x1]
+        moonnumber = x4
+        pMoon = Planet_list[x4]
     if particle0.label == "EARTH":
-        earthnumber = x1
-        pEarth = Planet_list[x1]
+        earthnumber = x4
+        pEarth = Planet_list[x4]
 
 
 PeriapseMoon = [p3D.mag_sep(pMoon,pEarth)]
@@ -91,7 +93,7 @@ time_list = []
 
 ###Running through simulation for the number of steps and timestep size defined in simulation parameters###
 
-for i in xrange(1,numstep):
+for i in range(1,numstep):
     if i%vmdstep ==0:
         VMDFILE.write('{}\n'.format(Num_Bodies))
         VMDFILE.write('Point = {}\n'.format(i/vmdstep))
@@ -110,16 +112,17 @@ for i in xrange(1,numstep):
 
         #loop to find moon periapse and apoapse + period
         if x1 == earthnumber:
-            ThetaMoon[0] = pMoon.ang_vel(pMoon,pEarth,w)*dt+ThetaMoon[0]
-            if ThetaMoon[0] > 2*m.pi:
-                PeriodMoon.append(i*dt/(60.0*60.0*24.0)-sum(PeriodMoon))
-                ThetaMoon[0] = ThetaMoon[0]-2*m.pi
-
             MoonSep = p3D.mag_sep(pMoon,pEarth)
             if PeriapseMoon[0] > MoonSep:
                 PeriapseMoon[0] = MoonSep
             if ApoapseMoon[0] < MoonSep:
                 ApoapseMoon[0] = MoonSep
+
+        if x1 == moonnumber and x1 != earthnumber:
+            ThetaMoon[0] = pMoon.ang_vel(pMoon,pEarth,w)*dt+ThetaMoon[0]
+            if ThetaMoon[0] > 2*m.pi:
+                PeriodMoon.append(i*dt/(60.0*60.0*24.0) - sum(PeriodMoon) )
+                ThetaMoon[0] = ThetaMoon[0]-2*m.pi
 
         #loop to find other planet periapse and apoapse + period
         if x1 != moonnumber and x1 != sunnumber:
@@ -147,14 +150,20 @@ for i in xrange(1,numstep):
                 
                 #Calculating force from between secondary planet to main planet
                 interaction_force = particle0.force(particle0,particle1,f)
-                potential_energy = potential_energy+particle0.poten(particle0,particle1,u)
+                
+                potential_energy = particle0.poten(particle0,particle1,u)
+#                if particle1.label == "SUN":
+#                    print particle0.label
+#                    print potential_energy   # Check to see if it matches rough calculations and it does!
+                total_potential = potential_energy+total_potential
+
 
                 #updating force arrays using force consideration F(x1 -> x2) = -F(x2 -> x1)
                 new_force_array[x1] = new_force_array[x1]+interaction_force
                 new_force_array[x2] = new_force_array[x2]-interaction_force
         ###Done calculating total force from all secondary planets on main planet###
-
-        kinetic_energy = (1.0/2.0)*particle0.mass*vctr.SqMag(particle0.velocity)+kinetic_energy
+        kinetic_energy = (1.0/2.0)*particle0.mass*(vctr.SqMag(particle0.velocity))
+        total_kinetic = total_kinetic+kinetic_energy
         particle0.newvel(dt,0.5*(force_array[x1]+new_force_array[x1]))        #calculates the new velocity, using verlet method, of main planet
         force_array[x1] = new_force_array[x1]
         particle0.newnewpos(dt,force_array[x1])
@@ -163,26 +172,30 @@ for i in xrange(1,numstep):
         Planet_list.insert(x1,particle0)
         new_force_array[x1] = [0,0,0]                                         #set to 0 because at each new timestep entire forces need to be recalculated
 
-    total_energy = kinetic_energy+potential_energy
+    total_energy = total_kinetic+total_potential
     Energy_list.append(total_energy)
     time_list.append((i*dt)/(60.0*60.0*24.0*365.25))
     kinetic_energy = 0.0
-    potential_energy =0.0
+    total_kinetic = 0.0
+    total_potential =0.0
+    total_energy = 0.0
     time = time + dt
 
-for x1 in range(1,Num_Bodies):
+for x1 in xrange(Num_Bodies):
     particle0 = Planet_list[x1]
-    Orbit_info.write('{} \n'.format(particle0.label))
     if particle0.label == "MOON":
-        Orbit_info.write('The Apoapse of this body is {}km \n'.format(float(ApoapseMoon[0])))
-        Orbit_info.write('The Periapse of this body is {}km \n'.format(float(PeriapseMoon[0])))
-        Orbit_info.write('The Orbital Period of this body is {} days \n \n'.format( float(sum(PeriodMoon)) / float(len(PeriodMoon)) ) )
-    if x1 != moonnumber:
-        Orbit_info.write('The Apoapse of this body is {}km \n'.format(float(Apoapsis[x1])))
-        Orbit_info.write('The Periapse of this body is {}km \n'.format(float(Periapse[x1])))
-        Orbit_info.write('The Orbital Period of this body is {} days \n \n'.format( float(sum(Period[x1])) / float(len(Period[x1])) ) )
+        Orbit_info.write('{} \n'.format(particle0.label))
+        Orbit_info.write('The Apoapse of this body is {}km\n'.format(float(ApoapseMoon[0])))
+        Orbit_info.write('The Periapse of this body is {}km\n'.format(float(PeriapseMoon[0])))
+        Orbit_info.write('The Orbital Period of this body is {} days \n\n'.format( float(sum(PeriodMoon)) / float(len(PeriodMoon)) ) )
+    if x1 != moonnumber and x1 != sunnumber:
+        Orbit_info.write('{} \n'.format(particle0.label))
+        Orbit_info.write('The Apoapse of this body is {}km\n'.format(float(Apoapsis[x1])))
+        Orbit_info.write('The Periapse of this body is {}km\n'.format(float(Periapse[x1])))
+        Orbit_info.write('The Orbital Period of this body is {} days '.format( float(sum(Period[x1])) / float(len(Period[x1])) ) )
+        Orbit_info.write('(or {} years)\n\n'.format( float(sum(Period[x1])) / (365.25*float(len(Period[x1]))) ) )
 
-print PeriodMoon
+
 plt.plot(time_list,Energy_list)
 plt.title('The Total Energy of the Particle as a Function of Time')
 plt.xlabel('Time (Years)')
